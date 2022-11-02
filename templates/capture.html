@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take image</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="bg-img">
+        <div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-8  offset-lg-2">
+             
+                        <h2 class="title">Cature Plant image </h2>
+                        <form method="post" action="{{ url_for('requests') }}">
+                    
+                        <input type="submit" value="Capture" name="click"/>
+                        
+                        </form>
+                        <img src="{{ url_for('video_feed') }}" height="80%">
+                        <h3 style="font-family:courier;">Instructions:</h3>
+                        <ol style="font-family:courier;">
+                            <li>Capture--Take still-shot and save in the 'shots' directory</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+        </div>
+    </div>
+     
+</body>
+
+</html>

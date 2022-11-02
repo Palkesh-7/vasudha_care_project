@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TakeAPicture App</title>
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel ="stylesheet" href="../static/css/style.css">
+    <!-- <script src="../static/js/main.js" defer></script> -->
+</head>
+
+<body>
+    <div class = "bg-img">
+        <div class="container">
+            
+                <h1><img src="../static/bg-image/plant-icon.png" alt="logo" class="logo"> Take Plant Picture 
+                </h1>
+                <video class="video" width="400" height="200" class="video" autoplay></video>
+                <img src="../static/imgs/placeholder-400X200.png" alt="shot" class="shot">
+                
+            
+            <form method="POST" action="{{ url_for('shot') }}" >
+
+                <input class ="take-snap" type=button value="Take Snapshot" onClick="clickOn()">
+                <input type="hidden" id="capture-bt"  name="image">
+                
+                <div class="col-md-12 text-center">
+                    <br/>
+                    <button class="submit-bt">Submit</button>
+                </div>
+                
+                
+            </form>
+        </div>
+        <script>
+            const video = document.querySelector('video');
+            const picture = document.querySelector('.shot');
+
+            // Navigator video stream
+            async function videoStream (){
+                try{
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        video:true,
+                        audio:false
+                    });
+                    // Set video source
+                    video.srcObject = stream;
+                }catch(err){
+                    console.log(err);
+                }
+            }
+            function clickOn(){
+                const canvas = document.createElement('canvas');
+                canvas.width = video.width;
+                canvas.height = video.height;
+                canvas.getContext('2d').drawImage(video, 0,0, video.width, video.height);
+                // const img = canvas.toDataURL('image/png').replace('image/png', 1.0);
+                const img = canvas.toDataURL('image/jpeg');
+                picture.src = img;
+                document.getElementById("capture-bt").value = img;
+
+                // $(".image-tag").val(img);
+                // document.getElementById('image-tag').innerHTML = img
+
+                
+                // return img;
+                // const anchorTag = document.createElement('a');
+                //     anchorTag.href = img;
+                //     anchorTag.download = 'my-image.png';
+                //     document.body.appendChild(anchorTag);
+                //     anchorTag.click();
+
+            }
+            // Run function
+            videoStream();
+
+        </script>
+    </div>
+
+</body>
+
+</html>
